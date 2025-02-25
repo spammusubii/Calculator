@@ -1,0 +1,44 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
+* {
+    box-sizing: border-box;
+    font-size: 15px;
+    font-weight: 900;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.calculator {
+    border: 5px solid black;
+    border-radius: 8px;
+}
+
+.row {
+    display: flex;
+    width: 400px;
+}
+
+button {
+    width: 100px;
+    height: 75px;
+    border: 1px solid black;
+}
+
+.display {
+    width: 400px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
