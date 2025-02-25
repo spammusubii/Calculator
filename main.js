@@ -32,3 +32,6 @@ function operate(operator, num1, num2){
             return 0;
     }
 }
+
+const inputContainer = document.querySelector(".input-container");
+inputContainer.addEventListener("click", e => console.log(e.target.textContent))
