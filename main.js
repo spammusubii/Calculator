@@ -122,12 +122,8 @@ function checkIfInputFollowsRules(str){
     const currentDisplay = display.textContent.split(" ");
     const lastInput = currentDisplay.at(-1);
 
-    // return false if display is empty and operator is chosen
-    if (checkIfDisplayIsZero() && operators.includes(str)){
-        return false;  
-    }
     // return false if previous input is an operator and current input is an operator
-    else if (operators.includes(lastInput) && operators.includes(str)){
+    if (operators.includes(lastInput) && operators.includes(str)){
         return false;
     }
     // return false if previous input is an operator and 0 is chosen
