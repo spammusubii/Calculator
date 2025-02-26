@@ -1,5 +1,6 @@
 const inputContainer = document.querySelector(".input-container");
 const display = document.querySelector(".display");
+let resultDisplayed = false;
 
 function add(num1, num2){
     return num1 + num2;
@@ -14,6 +15,11 @@ function multiply(num1, num2){
 }
 
 function divide(num1, num2){
+    if (num2 === 0 && num1 !== 0){
+        alert("You cannot divide by 0");
+        clearDisplay();
+        return;
+    }
     return num1/num2;
 }
 
@@ -61,10 +67,16 @@ function filterInput(str){
     const currentDisplay = display.textContent.split(" ");
     const previousDisplayInput = currentDisplay.at(-1);
     if (operators.includes(str)){
+        resultDisplayed = false;
         addToDisplay(` ${str}`)
     }
     else if (numbers.includes(str)) {
-        if (checkIfDisplayIsZero()){
+        if (resultDisplayed){
+            resultDisplayed = false;
+            display.textContent = "";
+        }
+
+        if (checkIfDisplayIsZero() || display.textContent === ""){
             display.textContent = '';
             addToDisplay(str);
         }
@@ -85,6 +97,7 @@ function filterInput(str){
         const result = operate(operator, num1, num2);
         display.textContent = "";
         addToDisplay(result);
+        resultDisplayed = true;
     }
     else if (str === "+/-"){
         if (!checkIfDisplayIsZero() && !Number.isNaN(+previousDisplayInput)){
@@ -131,6 +144,7 @@ function checkIfInputFollowsRules(str){
 }
 
 function clearDisplay(){
+    resultDisplayed = false;
     display.textContent = "0";
 }
 
