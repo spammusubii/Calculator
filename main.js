@@ -87,8 +87,8 @@ function filterInput(str){
         addToDisplay(result);
     }
     else if (str === "+/-"){
-        if (!checkIfDisplayIsZero() && Number.isInteger(+previousDisplayInput)){
-            const num = Number.parseInt(previousDisplayInput);
+        if (!checkIfDisplayIsZero() && !Number.isNaN(+previousDisplayInput)){
+            const num = Number.parseFloat(previousDisplayInput);
             if (currentDisplay.length === 1){
                 display.textContent = "";
                 addToDisplay(`${-1*num}`);
