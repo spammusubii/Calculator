@@ -68,7 +68,7 @@ function filterInput(str){
             display.textContent = '';
             addToDisplay(str);
         }
-        else if (Number.isInteger(+previousDisplayInput)){
+        else if (!Number.isNaN(+previousDisplayInput)){
             addToDisplay(str);
         }
         else {
