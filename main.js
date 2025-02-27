@@ -2,16 +2,27 @@ const inputContainer = document.querySelector(".input-container");
 const display = document.querySelector(".display");
 let resultDisplayed = false;
 
+function round(value, precision) {
+    let multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+}
+
 function add(num1, num2){
-    return num1 + num2;
+    let result = num1 + num2;
+    result = Number.isInteger(result) ? result : round(result, 6);
+    return result;
 }
 
 function subtract(num1, num2){
-    return num1 - num2;
+    let result = num1 - num2;
+    result = Number.isInteger(result) ? result : round(result, 6);
+    return result;
 }
 
 function multiply(num1, num2){
-    return num1 * num2;
+    let result = num1 * num2;
+    result = Number.isInteger(result) ? result : round(result, 6);
+    return result;
 }
 
 function divide(num1, num2){
@@ -20,7 +31,9 @@ function divide(num1, num2){
         clearDisplay();
         return;
     }
-    return num1/num2;
+    let result = num1 / num2;
+    result = Number.isInteger(result) ? result : round(result, 6);
+    return result;
 }
 
 function modulo(num1, num2){
@@ -66,6 +79,7 @@ function filterInput(str){
     // previous input
     const currentDisplay = display.textContent.split(" ");
     const previousDisplayInput = currentDisplay.at(-1);
+
     if (operators.includes(str)){
         resultDisplayed = false;
         addToDisplay(` ${str}`)
@@ -113,6 +127,19 @@ function filterInput(str){
             }
         }
     }
+    else if (str === "."){
+        if (resultDisplayed){
+            resultDisplayed = false;
+            clearDisplay();
+        }
+        else {
+            let convertedToDecimal = '.';
+            if (operators.includes(previousDisplayInput)){
+                convertedToDecimal = ' 0' + convertedToDecimal;
+            }
+            addToDisplay(convertedToDecimal);
+        }   
+    }
 }
 
 // make sure input follows the rules
@@ -132,7 +159,11 @@ function checkIfInputFollowsRules(str){
     }
     else if (checkIfDisplayIsZero() && str === "0"){
         return false;
-    } else if (currentDisplay.length === 3  && operators.includes(str)){
+    }
+    else if (currentDisplay.length === 3  && operators.includes(str)){
+        return false;
+    }
+    else if (!Number.isNaN(+lastInput) && str.includes(".") && lastInput.includes(".")){
         return false;
     }
 
