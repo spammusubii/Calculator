@@ -157,7 +157,6 @@ function checkIfDisplayIsZero(){
 }
 
 inputContainer.addEventListener("click", e => {
-    console.log(e.target.textContent);
     const str = e.target.textContent;
     filterInput(str);
 });
