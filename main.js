@@ -113,6 +113,17 @@ function filterInput(str){
             }
         }
     }
+    else if (str === "."){
+        let newResult;
+        if (operators.includes(previousDisplayInput)){
+            newResult = currentDisplay.join(" ") + ` ${0}.`
+            display.textContent = "";
+        }
+        else {
+            newResult = ".";
+        }
+        addToDisplay(newResult);
+    }
 }
 
 // make sure input follows the rules
@@ -132,7 +143,11 @@ function checkIfInputFollowsRules(str){
     }
     else if (checkIfDisplayIsZero() && str === "0"){
         return false;
-    } else if (currentDisplay.length === 3  && operators.includes(str)){
+    }
+    else if (currentDisplay.length === 3  && operators.includes(str)){
+        return false;
+    }
+    else if (!Number.isNaN(+lastInput) && str.includes(".") && lastInput.includes(".")){
         return false;
     }
 
@@ -157,7 +172,6 @@ function checkIfDisplayIsZero(){
 }
 
 inputContainer.addEventListener("click", e => {
-    console.log(e.target.textContent);
     const str = e.target.textContent;
     filterInput(str);
 });
